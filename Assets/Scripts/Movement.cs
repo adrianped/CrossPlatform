@@ -7,11 +7,14 @@ public class Movement : MonoBehaviour
     bool isOnGround = true;
 
     private Rigidbody Rb;
+    private Animator Animate;
 
     // Use this for initialization
     void Start()
     {
+        Animate = GetComponent<Animator>();
         Rb = GetComponent<Rigidbody>();
+        Rb.velocity = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -46,13 +49,14 @@ public class Movement : MonoBehaviour
             if (isOnGround == true)
             {
                 //transform.Translate(transform.up * 200 * Time.deltaTime, Space.World);
-                Vector3 v3VelPos = Rb.velocity;
-                Rb.velocity = new Vector3(v3VelPos.x, 15, v3VelPos.z);
+                Vector3 v3VelPos = Rb.velocity; 
+                Rb.velocity = new Vector3(v3VelPos.x, 100, v3VelPos.z);
                 isOnGround = false;
             }
         }
-
-        //Rb.angularVelocity = Vector3.zero;
+        Animate.SetFloat("Speed", Rb.velocity.magnitude);
+        Animate.SetBool("Jump", isOnGround == false);
+        Rb.angularVelocity = Vector3.zero;
     }
 
     void OnTriggerEnter(Collider other)
