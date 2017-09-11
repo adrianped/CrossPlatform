@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     bool isOnGround = true;
-
+    public int speed = 10;
     private Rigidbody Rb;
     private Animator Animate;
 
@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
+        var x = Input.GetAxis("Horizontal") * Time.deltaTime * 250.0f;
         var z = Input.GetAxis("Vertical") * Time.deltaTime * 10.0f;
 
         float xx = Input.GetAxis("Horizontal");
@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            Rb.velocity = Rb.velocity + gameObject.transform.forward * Time.deltaTime * 300000;
+            Rb.velocity = Rb.velocity + gameObject.transform.forward * Time.deltaTime * 30000;
             Debug.Log(Rb.velocity);
         }
 
@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour
             {
                 //transform.Translate(transform.up * 200 * Time.deltaTime, Space.World);
                 Vector3 v3VelPos = Rb.velocity; 
-                Rb.velocity = new Vector3(v3VelPos.x, 100, v3VelPos.z);
+                Rb.velocity = new Vector3(v3VelPos.x, 10, v3VelPos.z);
                 isOnGround = false;
             }
         }
@@ -65,3 +65,4 @@ public class Movement : MonoBehaviour
         isOnGround = true;
     }
 }
+
